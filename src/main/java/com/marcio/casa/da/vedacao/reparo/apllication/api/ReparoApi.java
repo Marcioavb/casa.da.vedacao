@@ -21,9 +21,8 @@ public interface ReparoApi {
     @ResponseStatus(HttpStatus.OK)
     ReparoResponse buscaPorCodigo(@PathVariable String codigo);
 
-    @GetMapping("/medidas/{medidas}")
+    @GetMapping("/medidas")
     @Operation(summary = "Busca reparos por medidas")
     @ResponseStatus(HttpStatus.OK)
-    List<ReparoResponse> buscaPorMedidas(@PathVariable String medidas);
-
+    List<ReparoResponse> buscaPorMedidas(@RequestParam String medidas);
 }

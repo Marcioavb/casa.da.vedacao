@@ -38,12 +38,14 @@ public class ReparoinfraRepository implements ReparoRepository {
     @Override
     public List<Reparo> buscaPorMedidas(String medidas) {
         log.info("[inicia] ReparoinfraRepository - buscaPorMedidas");
+        // Busca contendo a medida em qualquer parte do texto
         List<Reparo> reparos = springDataJPARepository.findByMedidasContaining(medidas);
 
         if(reparos.isEmpty()) {
             throw APIException.build(HttpStatus.NOT_FOUND,
-                    "Nenhum reparo encontrado com as medidas contendo: " + medidas);
+                    "Nenhum reparo encontrado contendo a medida: " + medidas);
         }
+
         log.info("[finaliza] ReparoinfraRepository - buscaPorMedidas");
         return reparos;
     }
