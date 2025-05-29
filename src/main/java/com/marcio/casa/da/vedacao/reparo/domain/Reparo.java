@@ -12,10 +12,13 @@ import java.util.UUID;
 
 @Getter
 @ToString
-@Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"codigo", "medidas"}, name = "uk_codigo_medidas")
+})
 public class Reparo {
 
     @Id

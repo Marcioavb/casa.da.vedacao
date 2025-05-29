@@ -3,6 +3,7 @@ package com.marcio.casa.da.vedacao.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -39,5 +40,19 @@ public class RestResponseEntityExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorApiResponse> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        String errorMessage = "Erro ao cadastrar reparo";
+
+        if (ex.getMessage().contains("uk_codigo_medidas")) {
+            errorMessage = "Já existe um reparo com este código e medidas combinados";
+        }
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ErrorApiResponse.builder()
+                        .message(errorMessage)
+                        .build());
     }
 }
