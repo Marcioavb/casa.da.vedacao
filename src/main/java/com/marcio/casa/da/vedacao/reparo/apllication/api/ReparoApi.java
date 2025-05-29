@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/reparo")
 @Tag(name = "reparo", description = "Endpoints para cadastrar reparo.")
 public interface ReparoApi {
@@ -18,4 +20,10 @@ public interface ReparoApi {
     @Operation(summary = "Busca reparo por código")
     @ResponseStatus(HttpStatus.OK)
     ReparoResponse buscaPorCodigo(@PathVariable String codigo);
+
+    @GetMapping("/medidas/{medidas}")
+    @Operation(summary = "Busca reparos por medidas")
+    @ResponseStatus(HttpStatus.OK)
+    List<ReparoResponse> buscaPorMedidas(@PathVariable String medidas);
+
 }

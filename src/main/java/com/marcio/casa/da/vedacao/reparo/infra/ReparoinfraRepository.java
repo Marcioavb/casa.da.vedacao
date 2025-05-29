@@ -8,6 +8,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 @Log4j2
@@ -26,9 +28,23 @@ public class ReparoinfraRepository implements ReparoRepository {
     public Reparo buscaPorCodigo(String codigo) {
         log.info("[inicia] ReparoinfraRepository - buscaPorCodigo");
         Reparo reparo = springDataJPARepository.findByCodigo(codigo)
-                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Codigo, nao encontrado, " +
+                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Codigo, nao encontrado," +
+                        "para esse codigo, contendo: " +
                         "não existe na base de dados"));
         log.info("[finaliza] ReparoinfraRepository - buscaPorCodigo");
         return reparo;
+    }
+
+    @Override
+    public List<Reparo> buscaPorMedidas(String medidas) {
+        log.info("[inicia] ReparoinfraRepository - buscaPorMedidas");
+        List<Reparo> reparos = springDataJPARepository.findByMedidasContaining(medidas);
+
+        if(reparos.isEmpty()) {
+            throw APIException.build(HttpStatus.NOT_FOUND,
+                    "Nenhum reparo encontrado com as medidas contendo: " + medidas);
+        }
+        log.info("[finaliza] ReparoinfraRepository - buscaPorMedidas");
+        return reparos;
     }
 }

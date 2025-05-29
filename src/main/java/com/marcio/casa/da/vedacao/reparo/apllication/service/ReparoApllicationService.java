@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Log4j2
 @Service
@@ -27,5 +30,15 @@ public class ReparoApllicationService implements ReparoService {
         Reparo reparo = reparoRepository.buscaPorCodigo(codigo);
         log.info("[finaliza] ReparoApllicationService - buscaPorCodigo");
         return new ReparoResponse(reparo);
+    }
+
+    @Override
+    public List<ReparoResponse> buscaPorMedidas(String medidas) {
+        log.info("[inicia] ReparoApllicationService - buscaPorMedidas");
+        List<Reparo> reparos = reparoRepository.buscaPorMedidas(medidas);
+        log.info("[finaliza] ReparoApllicationService - buscaPorMedidas");
+        return reparos.stream()
+                .map(ReparoResponse::new)
+                .collect(Collectors.toList());
     }
 }
