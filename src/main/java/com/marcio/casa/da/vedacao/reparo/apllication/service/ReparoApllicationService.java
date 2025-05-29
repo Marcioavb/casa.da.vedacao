@@ -20,4 +20,12 @@ public class ReparoApllicationService implements ReparoService {
         log.info("[finaliza] ReparoApllicationService - cadatraReparo");
         return new ReparoResponse(reparo);
     }
+
+    @Override
+    public ReparoResponse buscaPorCodigo(String codigo) {
+        log.info("[inicia] ReparoApllicationService - buscaPorCodigo");
+        Reparo reparo = reparoRepository.buscaPorCodigo(codigo);
+        log.info("[finaliza] ReparoApllicationService - buscaPorCodigo");
+        return new ReparoResponse(reparo);
+    }
 }

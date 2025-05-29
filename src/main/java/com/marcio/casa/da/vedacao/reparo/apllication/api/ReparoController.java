@@ -18,4 +18,12 @@ public class ReparoController implements ReparoApi {
         log.info("[finaliza] ReparoController - cadastraReparo");
         return reparoCadastrado;
     }
+
+    @Override
+    public ReparoResponse buscaPorCodigo(String codigo) {
+        log.info("[inicia] ReparoController - buscaPorCodigo");
+        ReparoResponse reparo = reparoService.buscaPorCodigo(codigo);
+        log.info("[finaliza] ReparoController - buscaPorCodigo");
+        return reparo;
+    }
 }

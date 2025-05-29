@@ -5,4 +5,5 @@ import com.marcio.casa.da.vedacao.reparo.apllication.api.ReparoResponse;
 
 public interface ReparoService {
     ReparoResponse cadatraReparo(ReparoRequest reparoRequest);
+    ReparoResponse buscaPorCodigo(String codigo);
 }
