@@ -49,4 +49,11 @@ public class ReparoinfraRepository implements ReparoRepository {
         log.info("[finaliza] ReparoinfraRepository - buscaPorMedidas");
         return reparos;
     }
+    @Override
+    public void deletaReparo(Reparo reparo) {
+        log.info("[inicia] ReparoinfraRepository - deletaReparo");
+        springDataJPARepository.delete(reparo);
+        log.info("[finaliza] ReparoinfraRepository - deletaReparo");
+    }
+
 }

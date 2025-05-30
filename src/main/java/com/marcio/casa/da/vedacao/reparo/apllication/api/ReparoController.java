@@ -3,6 +3,7 @@ package com.marcio.casa.da.vedacao.reparo.apllication.api;
 import com.marcio.casa.da.vedacao.reparo.apllication.service.ReparoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,4 +38,19 @@ public class ReparoController implements ReparoApi {
         log.info("[finaliza] ReparoController - buscaPorMedidas");
         return reparos;
     }
+    @Override
+    public ReparoResponse atualizaReparoPorCodigo(String codigo, ReparoRequest reparoRequest) {
+        log.info("[inicia] ReparoController - atualizaReparoPorCodigo");
+        ReparoResponse response = reparoService.atualizaReparoPorCodigo(codigo, reparoRequest);
+        log.info("[finaliza] ReparoController - atualizaReparoPorCodigo");
+        return response;
+    }
+
+    @Override
+    public void deletaReparoPorCodigo(String codigo) {
+        log.info("[inicia] ReparoController - deletaReparoPorCodigo");
+        reparoService.deletaReparoPorCodigo(codigo);
+        log.info("[finaliza] ReparoController - deletaReparoPorCodigo");
+    }
+
 }

@@ -3,6 +3,7 @@ package com.marcio.casa.da.vedacao.reparo.apllication.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,4 +26,16 @@ public interface ReparoApi {
     @Operation(summary = "Busca reparos por medidas")
     @ResponseStatus(HttpStatus.OK)
     List<ReparoResponse> buscaPorMedidas(@RequestParam String medidas);
+
+    @PatchMapping("/codigo/{codigo}")
+    @Operation(summary = "Atualiza um reparo pelo código")
+    @ResponseStatus(HttpStatus.OK)
+    ReparoResponse atualizaReparoPorCodigo(
+            @PathVariable String codigo,
+            @RequestBody ReparoRequest reparoRequest);
+
+    @DeleteMapping("/codigo/{codigo}")
+    @Operation(summary = "Remove um reparo pelo código")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deletaReparoPorCodigo(@PathVariable String codigo);
 }

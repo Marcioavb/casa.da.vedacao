@@ -44,4 +44,15 @@ public class Reparo {
         this.local = reparoRequest.getLocal();
         this.dataCadastro = LocalDateTime.now();
     }
+
+    public void setValorComprado(BigDecimal valorComprado) {
+        this.valorComprado = valorComprado;
+    }
+        public void setLocal(String local) {
+            this.local = local;
+    }
+
+    public void setMedidas(String medidas) {
+        this.medidas = medidas;
+    }
 }

@@ -9,4 +9,5 @@ public interface ReparoRepository {
     Reparo buscaPorCodigo(String codigo);
 
     List<Reparo> buscaPorMedidas(String medidas);
+    void deletaReparo(Reparo reparo);
 }

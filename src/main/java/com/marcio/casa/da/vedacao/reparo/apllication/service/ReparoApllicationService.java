@@ -41,4 +41,41 @@ public class ReparoApllicationService implements ReparoService {
                 .map(ReparoResponse::new)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ReparoResponse atualizaReparoPorCodigo(String codigo, ReparoRequest reparoRequest) {
+        log.info("[inicia] ReparoApllicationService - atualizaReparoPorCodigo");
+
+        // Busca o reparo existente
+        Reparo reparo = reparoRepository.buscaPorCodigo(codigo);
+
+        // Atualiza apenas os campos fornecidos
+        if (reparoRequest.getValorComprado() != null) {
+            reparo.setValorComprado(reparoRequest.getValorComprado());
+        }
+
+        if (reparoRequest.getLocal() != null) {
+            reparo.setLocal(reparoRequest.getLocal());
+        }
+
+        // Adicione outros campos que podem ser atualizados
+        if (reparoRequest.getMedidas() != null) {
+            reparo.setMedidas(reparoRequest.getMedidas());
+        }
+
+        // Salva as alterações
+        Reparo reparoAtualizado = reparoRepository.salva(reparo);
+
+        log.info("[finaliza] ReparoApllicationService - atualizaReparoPorCodigo");
+        return new ReparoResponse(reparoAtualizado);
+    }
+
+    @Override
+    public void deletaReparoPorCodigo(String codigo) {
+        log.info("[inicia] ReparoApllicationService - deletaReparoPorCodigo");
+        Reparo reparo = reparoRepository.buscaPorCodigo(codigo);
+        reparoRepository.deletaReparo(reparo);
+        log.info("[finaliza] ReparoApllicationService - deletaReparoPorCodigo");
+    }
+
 }

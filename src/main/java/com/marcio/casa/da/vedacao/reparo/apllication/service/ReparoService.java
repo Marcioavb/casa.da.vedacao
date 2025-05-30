@@ -10,4 +10,6 @@ public interface ReparoService {
     ReparoResponse buscaPorCodigo(String codigo);
 
     List<ReparoResponse> buscaPorMedidas(String medidas);
+    void deletaReparoPorCodigo(String codigo);
+    ReparoResponse atualizaReparoPorCodigo(String codigo, ReparoRequest reparoRequest);
 }
